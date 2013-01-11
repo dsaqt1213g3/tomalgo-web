@@ -124,21 +124,6 @@ function makeResultTable(games) {
 		cell.appendChild(cellText);
 		row.appendChild(cell);
 
-		var assistText;
-		if(games[i].promo) {
-			assists(games[i].id, assistResult);
-			console.log("Hola");
-			console.log(assist);
-			assistText = assist;
-		} else {
-			assistText = "no es promo";
-		}
-
-		cell = document.createElement("td");
-		cellText = document.createTextNode(assistText);
-		cell.appendChild(cellText);
-		row.appendChild(cell);
-
 		// add the row to the end of the table body
 		tblBody.appendChild(row);
 	}
@@ -154,13 +139,18 @@ function showContent (content){
 }
 
 function navbarClick(content){
+	
+	if(content === 'oferta')
+		listgames(listGamesResult);
+	else if (content === 'sala') {
+		listoldgames(listGamesResult);
+		content = 'oferta';	
+	}
+	
 	$.each ($('.navbar-button:not(a'+content+')'), function(k,v){
 		$("#"+v.id).removeClass("active");
 	});	
-	if(content === 'oferta')
-		listgames(listGamesResult);
-	else if (content === 'sala')
-		listoldgames(listoldGamesResult);
+	
 	$("#a" + content).addClass("active");
 	showContent("#" +content);
 }
