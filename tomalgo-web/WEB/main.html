@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>¿Vas de copas? - Main</title>
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+	
+	<style type="text/css">
+		add.right{text-align:right;}
+		
+		      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+	</style>
+</head>
+
+<body>
+  	<div class="navbar navbar-inverse navbar-static-top">
+		<div class="navbar-inner">
+				
+			<ul class="nav">
+				<a class="brand">¿Vas de copas?</a>
+				<li class="navbar-button" id="asala">    <a class="navbar-button" href="#">Mis Ofertas</a></li>
+				<li class="navbar-button" id="atag"><a class="navbar-button" href="#">Tags seleccionados</a></li>
+				<li class="navbar-button" id="aevento"><a class="navbar-button" href="#">Crear evento</a></li>        
+			</ul>
+			
+			<ul class="nav pull-right">
+				<li class="dropdown">
+					
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><b id="iusername">Usuario</b><span class="caret"></span></a>
+					
+					<ul class="dropdown-menu">
+						<li><a href="#" id="aperfil">Perfil</a></li>
+						<li><a href="cambiopass.html">Cambiar password</a></li>
+						<li><a href="decline.html">Darte de Baja</a></li>
+						<li class="divider"></li>
+						<li><a href="#" id="acloseSesion">Cerrar Sesión</a></li>
+					</ul>
+				</li>
+			</ul>
+			
+			<form class="navbar-search pull-right">
+				<input type="text" class="search-query" placeholder="Buscar bar">
+			</form>	
+			
+		</div>
+	</div>
+    
+	<form class="row well span12">
+		<div class = "conatiner content hide" id = "sala">
+			<h1>Ofertas disponibles</h1>
+			<div id="resultados">
+				<table class= "table table-haver" id="trewResultados">
+					<thead>
+						<tr>
+							<th> Id Oferta</th>
+							<th>Nombre del bar</th>
+							<th>Información</th>
+							<th>Fecha de inicio</th>
+							<th>Fecha de final</th>
+							<th>Dato de asistencia</th>
+						</tr>
+					</thead>
+				</table>
+			</div>	
+		</div>
+
+		<form  class="row well span12" id="tag-form">
+		<div class = "conatiner content hide" id = "tag">
+			<h1>Elige los tags de su restaurante</h1>
+			
+						<tr>
+							<text>TAGS:  (marca 3 tags como maximo)</text> 
+							<p></p>
+
+							<label class="checkbox inline">
+ 							<input type="checkbox" id="inlineCheckbox1" value="option1"> Jawaiano
+							</label>
+							<label class="checkbox inline">
+  							<input type="checkbox" id="inlineCheckbox2" value="option2"> Nocturno
+							</label>
+							<label class="checkbox inline">
+  							<input type="checkbox" id="inlineCheckbox3" value="option3"> Copas
+							</label>
+							<label class="checkbox inline">
+  							<input type="checkbox" id="inlineCheckbox4" value="option4"> Romantico
+							</label>
+							<label class="checkbox inline">
+  							<input type="checkbox" id="inlineCheckbox5" value="option5"> Negocios
+							</label>
+							<p></p>
+							<button type="submit" class="btn btn-success" id="botonTags">Confirmar</button>
+						</tr>
+					</div>
+	</form>
+
+	<form  class="row well span12" id="evento-form">
+		<div class = "conatiner content hide" id = "evento">
+			<h1>Creación de evento</h1>
+			<div id="evento">
+						<tr>
+							<text>Información                       </text> 
+							<input class="span4" type="text" id="iinfo">
+							<p></p>
+							<text>Fecha de inicio(AAAA-MM-DD HH:MM) </text> 
+							<input class="span2" type="text" id="iinidate">
+							<p></p>
+							<text>Fecha de final (AAAA-MM-DD HH:MM)</text> 
+							<input class="span2" type="text" id="ienddate"> 
+							<p></p>
+							<text>Requiere suscripción previa (0:No;1:Si)</text> 
+							<input class="span1" type="text" id="isuscripción">
+							<p></p>
+							<button type="submit" class="btn btn-success" id="botonEvento">Crear</button>
+						</tr>
+			</div>	
+		</div>
+	</form>
+		
+	<form  class="row well span12" id="evento-form">
+		<div class = "conatiner content hide" id = "contacto">
+			<h1>Contacto</h1>
+		</div>
+		
+		<div class = "conatiner content hide" id = "perfil">
+			<h1>Perfil</h1>
+			<p id="iname">Nombre: </p>
+			<p id="imail">Email: </p>
+		</div>
+    
+		<div class = "conatiner content hide" id = "inicio">
+			<h1 id="iniID">Bienvenid@</h1>
+			<p>Te has autenticado correctamente </p>
+		</div>    
+		
+	</form>
+
+
+
+
+<!-- SCRIPTS -->
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
+<script src="https://raw.github.com/makeusabrew/bootbox/v2.4.2/bootbox.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/jquery.jsonp-2.4.0.min.js"></script>
+<script type="text/javascript" src="js/mus-service-api.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
