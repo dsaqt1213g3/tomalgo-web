@@ -1,3 +1,3 @@
-# Configuracion de la web
+# Configuración de la web
 
-Cojer todos los archivos y copiarlos en un servidor apache.
+Coger todos los archivos y copiarlos en un servidor apache.
