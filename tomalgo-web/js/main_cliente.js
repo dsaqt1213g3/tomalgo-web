@@ -1,7 +1,7 @@
 var user;
 ERROR_PAGE="error.html";
-
-
+INIT_PAGE = "login.html";
+ENTERPRISE_MAIN_PAGE = "main.html";
 
 
 function eventoResult(response) {
@@ -14,25 +14,28 @@ function eventoResult(response) {
 
 
 function assistResult(response) {
-	if (response.status == 'OK' && response.result.succeed) {
-		window.location.href = MAIN_PAGE;
+	if (response.status == 'OK' && response.result) {
+		bootbox.alert("Has sido confirmado para este evento");
 	} else {
-		bootbox.alert(response.result.message);
+		bootbox.alert("Ya estas apuntado para este evento");
 	}
 }
 
-
+function loggedResult(response){
+	if (response.status === 'OK' && response.result) {
+		navbarClick('inicio');
+		$('#fullpage').show();
+	} else {
+		window.location.href = INIT_PAGE;
+	}
+}
 
 function loggedResult(response){
-	if (response.status==='OK' && response.result){
-		user = $.parseJSON($.cookie('mus-user'));
-		$('#iusername').text(user.username);
-		console.log($.cookie('user-pass'));
+	if (response.status === 'OK' && response.result) {
 		navbarClick('inicio');
-    $('#iniID').text("Bienvenid@ " + $.parseJSON($.cookie('mus-user')).username);
 		$('#fullpage').show();
-	}else{
-		window.location.href="login.html";
+	} else {
+		window.location.href = INIT_PAGE;
 	}
 }
 
@@ -49,40 +52,27 @@ function infoResult(){
 		$('#imail').text("Email: " + $.cookie('user-mail'));
 }
 
-
-//$.cookie('minecraft-user', username);
-
 function listGamesResult(response){
 	if (response.status==='OK'){
-		console.log(response.result);
-		makeResultTable(response.result);
+		makeResultTable(response.result, true);
 	}else{
 		window.location.href="error.html";
 	}
 }
 
-function listoldGamesResult(response){
+function listOldGamesResult(response){
 	if (response.status==='OK'){
-		console.log(response.result);
-		makeResultTable(response.result);
+		makeResultTable(response.result, false);
 	}else{
 		window.location.href="error.html";
 	}
 }
 
-var assist;
-function assistResult(response){
-	console.log(response.result);
-	assist = response.result;
-	console.log(assist);
-}
-
-
-function makeResultTable(games) {
+function makeResultTable(games, c) {
 		
 	// creates a <table> element and a <tbody> element
 	var tbl = document.getElementById("trewResultados");
-	
+
 	var tblBody = document.getElementById("tableBody");
 	if(tblBody != null)
 		tbl.removeChild(tblBody);
@@ -124,6 +114,26 @@ function makeResultTable(games) {
 		cell.appendChild(cellText);
 		row.appendChild(cell);
 
+		cell = document.createElement("td");	
+		row.appendChild(cell);
+
+		if(games[i].promo && c) {
+			var button = document.createElement("button");
+			button.setAttribute("type", "submit");
+			button.setAttribute("class", "btn btn-success");	
+			button.setAttribute("event", games[i].id);		
+			button.setAttribute("id", "event" + games[i].id);
+			
+		 	button.addEventListener('click', function(e) {
+				e.preventDefault();
+				confirmAssist(e.toElement.getAttribute("event"), assistResult);				
+			}, false);
+
+			cellText = document.createTextNode("confirma asistencia");
+			button.appendChild(cellText);
+			cell.appendChild(button);
+		}
+
 		// add the row to the end of the table body
 		tblBody.appendChild(row);
 	}
@@ -139,21 +149,40 @@ function showContent (content){
 }
 
 function navbarClick(content){
-	
-	if(content === 'oferta')
-		listgames(listGamesResult);
-	else if (content === 'sala') {
-		listoldgames(listGamesResult);
-		content = 'oferta';	
-	}
-	
 	$.each ($('.navbar-button:not(a'+content+')'), function(k,v){
 		$("#"+v.id).removeClass("active");
 	});	
 	
 	$("#a" + content).addClass("active");
+	
+	if(content === 'oferta')
+		listgames(listGamesResult);
+	else if (content === 'sala') {
+		listoldgames(listOldGamesResult);
+		content = 'oferta';	
+	}
+	
+
 	showContent("#" +content);
 }
+
+$(document).ready(function() {
+	var error = $.cookie('user-name') == null || $.cookie('user-enterprise') == null;
+	console.log(error);
+	if(!error) {
+		console.log($.cookie('user-enterprise'));
+		if($.cookie('user-enterprise') == "false") {
+			logged($.cookie('user-name'), loggedResult);
+		} else {
+			window.location.href = ENTERPRISE_MAIN_PAGE;	
+		}
+			
+	} else {
+		window.location.href = INIT_PAGE;
+	}
+
+});
+
 
 $('#asala').click(function(e){
 	e.preventDefault();	
@@ -186,12 +215,35 @@ $('#acloseSesion').click(function(e){
 	logout(logoutResult);
 });
 
-$('#botonConfirmar').click(function(e) {
-	e.preventDefault();
-	confirmAssist($('#iid').val(), assistResult);
-});
-
 $('#botonTags').click(function(e) {
 	e.preventDefault();
-	sendEvent($('#iinfo').val(), $('#iinidate').val(), $('#ienddate').val(), eventoResult);
+	var tags= "[";
+	var nTags = 0;
+
+	var checkbox = new Array(
+		document.tag.inlineCheckbox1,
+		document.tag.inlineCheckbox2,
+		document.tag.inlineCheckbox3,
+		document.tag.inlineCheckbox4,
+		document.tag.inlineCheckbox5
+	);
+
+	for (var i = 0; i < checkbox.length; i++){
+		if (checkbox[i].checked == true)
+		{
+			if (nTags == 0)
+				tags = tags + checkbox[i].value;
+			else
+				tags = tags + "," + checkbox[i].value;
+			nTags++;
+		}
+	}
+	tags = tags + "]";
+	updateTags(tags,function(response){ 
+		if (response.status == 'OK' && response.result) {
+			bootbox.alert("Has seleccionado de forma correcta tus Tags");
+		} else {
+			bootbox.alert("No se han podido introducir los tags seleccionados");
+		}
+	});
 });

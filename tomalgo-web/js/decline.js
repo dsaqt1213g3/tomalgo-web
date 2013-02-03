@@ -8,9 +8,10 @@ $('#decline').submit(function(e) {
 });
 
 function declineResult(response) {
-	if (response.result.succeed) {
+	if (response.status = 'OK' && response.result) {
+		self.close();
 		window.location.href = LOGIN_PAGE;
 	} else {
-		bootbox.alert(response.result.message);
+		bootbox.alert("No has puesto bien la contraseña");
 	}
 }

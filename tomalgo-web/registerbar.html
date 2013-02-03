@@ -61,23 +61,11 @@
       </a>
 
       <div class="nav-collapse collapse">
-          <a class="brand" href="#">Entra para empezar a buscar las mejores ofertas :</a>
-
-        <!-- .nav, .navbar-search, .navbar-form, etc -->
-        <form class="navbar-form pull-right" id="login-form">
- 		 <input class="span2" type="text" id="iusername">
- 		 <input type="password" class="span2" id="ipassword">
- 		 <button type="submit" class="btn btn-success" id="login-form"> Entrar</button>
- 		 <a type="submit" href="register.html" class="btn btn-primary">Registro</a>
- 		 
-		</form>
-        
+          <a class="brand" href="#">Registrate en : ¿Vas de copas?</a>        
       </div>
- 
     </div>
   </div>
 </div>
-<img src="2.jpg" center width="1280" height="400" />
    <div class="container-narrow">
    
 
@@ -85,43 +73,45 @@
         
       <hr>
 
-        <p class="lead">Si quieres salir a tomar algo y buscas el mejor sitio para ti y tus amigos, sólo tienes que buscar en nuestras ofertas llenas de descuentos y promociones de los mejores bares al mejor precio</p>
-         <p class="lead">¿Tienes un bar y quieres hacer tus ofertas?</p>
-        <a class="btn btn-large btn-success" href="registerbar.html">Entrar</a>
+
+	 	<div class="row">
+		 	<form class="well span4" id="register-form">
+		 		<legend>Crea tu cuenta</legend>
+				<div class="control-group" id="cgusername">
+					<label>Nombre de usuario</label>
+					<input type="text" class="span4" id="iusername">
+					<span id="eusername" class="help-inline hide">Something may have gone wrong</span>
+				</div>
+				<div class="control-group" id="cgpassword1">
+					<label>Contraseña</label>
+					<input type="password" class="span4" id="ipassword1">
+					<span id="epassword1" class="help-inline hide">Something may have gone wrong</span>
+				</div>
+				<div class="control-group" id="cgpassword2">
+					<label>Confirmación de contraseña</label>
+					<input type="password" class="span4" id="ipassword2">
+					<span id="epassword2" class="help-inline hide">Something may have gone wrong</span>
+				</div>
+				<div class="control-group" id=cgdireccion>
+					<label>Dirección</label>
+					<input type="text" class="span4" id="idireccion">
+					<span id="edireccion" class="help-inline hide">Something may have gone wrong</span>
+				</div>
+				<div class="control-group" id="cgemail">
+					<label>Correo electrónico</label>
+					<input type="email" class="span4" id="iemail">
+					<span class="help-inline hide" id="eemail">Something may have gone wrong</span>
+						</div>
+				<label></label>
+				<button type="submit" class="btn-primary" id="register-form">Crear Cuenta</button>
+			</form>
+		</div>
       </div>
 
-      <hr>
 
-      <div class="row-fluid marketing">
-        <div class="span6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-
-        <div class="span6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-      </div>
       
  <hr>
- 
- 	<div class="slider-content">
-		<img src="ams_115.jpg" width="300" height="200" />
-			        					
-	</div>
+
  
  
   <div class="footer">
@@ -136,9 +126,8 @@
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/jquery.jsonp-2.4.0.min.js"></script>
 <script type="text/javascript" src="js/sha1.js"></script>
-<script type="text/javascript" src="js/mus-service-api.js"></script>
-<script type="text/javascript" src="js/login.js"></script>
-
+<script type="text/javascript" src="js/tomalgo-service-api.js"></script>
+<script type="text/javascript" src="js/registerbar.js"></script>
 
 </body>
 </html>

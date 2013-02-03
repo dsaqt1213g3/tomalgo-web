@@ -75,25 +75,28 @@
 					<form class="well span4" id="register-form">
 						<legend>Crea tu cuenta</legend>
 						<div class="control-group" id="cgusername">
-							<label for="iusername">Nombre de usuario</label>
+							<label>Nombre de usuario</label>
 							<input type="text" class="span4" id="iusername">
 							<span id="eusername" class="help-inline hide">Something may have gone wrong</span>
 						</div>
-						<div class="control-group" id="cgpassword">
+						<div class="control-group" id="cgpassword1">
 							<label>Contraseña</label>
 							<input type="password" class="span4" id="ipassword1">
+							<span id="epassword1" class="help-inline hide">Something may have gone wrong</span>
+						</div>
+						<div class="control-group" id="cgpassword2">
 							<label>Confirmación de contraseña</label>
 							<input type="password" class="span4" id="ipassword2">
-							<span id="epassword" class="help-inline hide">Something may have gone wrong</span>
+							<span id="epassword2" class="help-inline hide">Something may have gone wrong</span>
 						</div>
-						<label>Nombre completo</label>
-						<input type="text" class="span4">
-						<label>Fecha de nacimiento</label>
-						<input type="text" class="span2" id="ifecha">
 						<div class="control-group">
+							<label>Fecha de nacimiento</label>
+							<input type="date" class="span2" id="ifecha">
+						</div>
+						<div class="control-group" id="cgemail">
 							<label>Correo electrónico</label>
-							<input type="text" class="span4" id="iemail">
-							<span class="help-inline">Something may have gone wrong</span>
+							<input type="email" class="span4" id="iemail">
+							<span class="help-inline hide" id="eemail">Something may have gone wrong</span>
 						</div>
 						<label></label>
 						<button type="submit" class="btn btn-success" id="register-form">Crear Cuenta</button>
@@ -114,7 +117,7 @@
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/jquery.jsonp-2.4.0.min.js"></script>
 <script type="text/javascript" src="js/sha1.js"></script>
-<script type="text/javascript" src="js/mus-service-api.js"></script>
+<script type="text/javascript" src="js/tomalgo-service-api.js"></script>
 <script type="text/javascript" src="js/register.js"></script>
 
 </body>

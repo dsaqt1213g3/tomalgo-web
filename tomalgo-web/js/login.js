@@ -12,6 +12,7 @@ function loginResult(response, username) {
 		$.cookie('user-name', $('#iusername').val());
 		$.cookie('user-pass', SHA1($('#ipassword').val()));
 		$.cookie('user-mail', response.result.mail);
+		$.cookie('user-enterprise', response.result.enterprise);
 		if (response.result.enterprise){
 			window.location.href = MAIN_PAGE;
 		}

@@ -1,28 +1,28 @@
 var user;
 ERROR_PAGE="error.html";
-
-
-
+INIT_PAGE = "login.html";
+CLIENT_MAIN_PAGE = "main_cliente.html";
 
 function eventoResult(response) {
 	if (response.status == 'OK') {
-		window.location.href = MAIN_PAGE;
+		$('#iinfo').val("");
+		$('#iinidate').val("");
+		$('#iinitime').val("");
+		$('#ienddate').val("");
+		$('#iendtime').val("");
+		$('#isuscripcion')[0].checked = false;
+		bootbox.alert("Se ha podido enviar con exito");
 	} else {
 		bootbox.alert(response.result.message);
 	}
 }
 
-
 function loggedResult(response){
-	if (response.status==='OK' && response.result){
-		user = $.parseJSON($.cookie('mus-user'));
-		$('#iusername').text(user.username);
-		console.log($.cookie('user-pass'));
+	if (response.status === 'OK' && response.result) {
 		navbarClick('inicio');
-    $('#iniID').text("Bienvenid@ " + $.parseJSON($.cookie('mus-user')).username);
 		$('#fullpage').show();
-	}else{
-		window.location.href="login.html";
+	} else {
+		window.location.href = INIT_PAGE;
 	}
 }
 
@@ -44,18 +44,16 @@ function infoResult(){
 
 function listGamesResult(response){
 	if (response.status==='OK'){
-		console.log(response.result);
 		makeResultTable(response.result);
 	}else{
 		window.location.href="error.html";
 	}
 }
 
-var assist;
-function assistResult(response){
-	console.log(response.result);
-	assist = response.result;
-	console.log(assist);
+function assistResult(response, id){
+	var cell = document.getElementById("assist" + id);
+	cellText = document.createTextNode(response.result);
+	cell.appendChild(cellText);
 }
 
 
@@ -105,20 +103,16 @@ function makeResultTable(games) {
 		cell.appendChild(cellText);
 		row.appendChild(cell);
 
-		var assistText;
+		cell = document.createElement("td");		
+		cell.setAttribute("id", "assist" + games[i].id);
+		row.appendChild(cell);
+
 		if(games[i].promo) {
 			assists(games[i].id, assistResult);
-			console.log("Hola");
-			console.log(assist);
-			assistText = assist;
 		} else {
-			assistText = "no es promo";
+			cellText = document.createTextNode("No es promo");
+			cell.appendChild(cellText);
 		}
-
-		cell = document.createElement("td");
-		cellText = document.createTextNode(assistText);
-		cell.appendChild(cellText);
-		row.appendChild(cell);
 
 		// add the row to the end of the table body
 		tblBody.appendChild(row);
@@ -141,8 +135,26 @@ function navbarClick(content){
 	if(content === 'sala')
 		listgames(listGamesResult);
 	$("#a" + content).addClass("active");
-	showContent("#" +content);
+	showContent("#" + content);
 }
+
+
+$(document).ready(function() {
+	var error = $.cookie('user-name') == null || $.cookie('user-enterprise') == null;
+	console.log(error);
+	if(!error) {
+		console.log($.cookie('user-enterprise'));
+		if($.cookie('user-enterprise') == "true") {
+			logged($.cookie('user-name'), loggedResult);
+		} else {
+			window.location.href = CLIENT_MAIN_PAGE;	
+		}
+			
+	} else {
+		window.location.href = INIT_PAGE;
+	}
+
+});
 
 $('#asala').click(function(e){
 	e.preventDefault();	
@@ -172,10 +184,52 @@ $('#acloseSesion').click(function(e){
 
 $('#botonEvento').click(function(e) {
 	e.preventDefault();
-	sendEvent($('#iinfo').val(), $('#iinidate').val(), $('#ienddate').val(), eventoResult);
+	if($('#iinitime').val() == "" || $('#iinidate').val() == "" || 
+	   $('#iendtime').val() == "" || $('#ienddate').val() == "" || $('#iinfo').val() == "") {
+		bootbox.alert("No puedes dejar campos en balanco");
+	} else {
+		var suscripcion = "0";
+		if($('#isuscripcion')[0].checked){
+			suscripcion = "1";
+		}
+		sendEvent($('#iinfo').val(),
+				  $('#iinidate').val() + " " +  $('#iinitime').val(),
+				  $('#ienddate').val() + " " +  $('#iendtime').val(),
+				  suscripcion,
+				  eventoResult);
+	}
+	
 });
 
 $('#botonTags').click(function(e) {
 	e.preventDefault();
-	sendEvent($('#iinfo').val(), $('#iinidate').val(), $('#ienddate').val(), eventoResult);
+	var tags= "[";
+	var nTags = 0;
+	
+	var checkbox = new Array(
+		document.tag.inlineCheckbox1,
+		document.tag.inlineCheckbox2,
+		document.tag.inlineCheckbox3,
+		document.tag.inlineCheckbox4,
+		document.tag.inlineCheckbox5
+	);
+
+	for (var i = 0; i < checkbox.length; i++){
+		if (checkbox[i].checked == true)
+		{
+			if (nTags == 0)
+				tags = tags + checkbox[i].value;
+			else
+				tags = tags + "," + checkbox[i].value;
+			nTags++;
+		}
+	}
+	tags = tags + "]";
+	updateTags(tags,function(response){ 
+		if (response.status == 'OK' && response.result) {
+			bootbox.alert("Has seleccionado de forma correcta tus Tags");
+		} else {
+			bootbox.alert("No se han podido introducir los tags seleccionados");
+		}
+	});
 });

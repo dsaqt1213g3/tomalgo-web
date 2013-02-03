@@ -9,22 +9,20 @@
 		add.right{text-align:right;}
 		
 		      body {
-        padding-top: 60px;
         padding-bottom: 40px;
       }
 	</style>
 </head>
 
-<body>
+<body class="hide" id="fullpage">
   	<div class="navbar navbar-inverse navbar-static-top">
 		<div class="navbar-inner">
 				
 			<ul class="nav">
 				<a class="brand">¿Vas de copas?</a>
-				<li class="navbar-button" id="aoferta">    <a class="navbar-button" href="#">Ofertas</a></li>
-				<li class="navbar-button" id="asala">    <a class="navbar-button" href="#">Promociones vencidas</a></li>
-				<li class="navbar-button" id="atag"><a class="navbar-button" href="#">Tags seleccionados</a></li>
-				<li class="navbar-button" id="aevento"><a class="navbar-button" href="#">Confirmar asistencia</a></li>        
+				<li class="navbar-button" id="aoferta"> <a class="navbar-button" href="#">Ofertas</a></li>
+				<li class="navbar-button" id="asala">   <a class="navbar-button" href="#">Promociones vencidas</a></li>
+				<li class="navbar-button" id="atag">	<a class="navbar-button" href="#">Tags seleccionados</a></li>       
 			</ul>
 			
 			<ul class="nav pull-right">
@@ -34,23 +32,19 @@
 					
 					<ul class="dropdown-menu">
 						<li><a href="#" id="aperfil">Perfil</a></li>
-						<li><a href="cambiopass.html">Cambiar password</a></li>
-						<li><a href="decline.html">Darte de Baja</a></li>
+						<li><a href="cambiopass.html" target="_blank" onClick="window.open(this.href, this.target, 'width=300,height=250'); return false;">Cambiar password</a></li>
+						<li><a href="decline.html" target="_blank" onClick="window.open(this.href, this.target, 'width=300,height=220'); window.location.href='login.html'; return false;">Darte de Baja</a></li>
 						<li class="divider"></li>
 						<li><a href="#" id="acloseSesion">Cerrar Sesión</a></li>
 					</ul>
 				</li>
 			</ul>
 			
-			<form class="navbar-search pull-right">
-				<input type="text" class="search-query" placeholder="Buscar bar">
-			</form>	
-			
 		</div>
 	</div>
     
-<form class="row well span12">
-		<div class = "conatiner content hide" id = "oferta">
+<form class="row well span12 content hide" id = "oferta">
+		<div class = "conatiner" id = "oferta">
 			<h1>Ofertas disponibles</h1>
 			<div id="oferta">
 				<table class= "table table-haver" id="trewResultados">
@@ -61,72 +55,63 @@
 							<th>Información</th>
 							<th>Fecha de inicio</th>
 							<th>Fecha de final</th>
+							<th>Asistir</th>
 						</tr>
 					</thead>
 				</table>
 			</div>	
 		</div>
-
-	<form  class="row well span12" id="tag-form">
-		<div class = "conatiner content hide" id = "tag">
+	</form>
+	<form  class="row well span12 content hide" name="tag" id="tag">
+		<div class = "conatiner" id = "tag">
 			<h1>Elige los tags a los que te quieres suscribir</h1>
 			
 						<tr>
-							<text>TAGS:</text> 
+							<text>TAGS:  (Elige todos los tags que te puedan interesar)</text> 
 							<p></p>
 
 							<label class="checkbox inline">
- 							<input type="checkbox" id="inlineCheckbox1" value="option1"> Jawaiano
+ 							<input type="checkbox" name="inlineCheckbox1" value="Jawaiano"> Jawaiano
 							</label>
 							<label class="checkbox inline">
-  							<input type="checkbox" id="inlineCheckbox2" value="option2"> Nocturno
+  							<input type="checkbox" name="inlineCheckbox2" value="Nocturno"> Nocturno
 							</label>
 							<label class="checkbox inline">
-  							<input type="checkbox" id="inlineCheckbox3" value="option3"> Copas
+  							<input type="checkbox" name="inlineCheckbox3" value="Copas"> Copas
 							</label>
 							<label class="checkbox inline">
-  							<input type="checkbox" id="inlineCheckbox4" value="option4"> Romantico
+  							<input type="checkbox" name="inlineCheckbox4" value="Romantico"> Romantico
 							</label>
 							<label class="checkbox inline">
-  							<input type="checkbox" id="inlineCheckbox5" value="option5"> Negocios
+  							<input type="checkbox" name="inlineCheckbox5" value="Negocios"> Negocios
 							</label>
 							<p></p>
 							<button type="submit" class="btn btn-success" id="botonTags">Confirmar</button>
 						</tr>
 					</div>
 	</form>
-
-	<form  class="row well span12" id="evento-form">
-		<div class = "conatiner content hide" id = "evento">
-			<h1>Confirma una oferta</h1>
-			<div id="evento">
-						<tr>
-							<text>Marca la ID de la oferta</text> 
-							<input class="span2" type="text" id="iid">
-							<p></p>
-							<button type="submit" class="btn btn-success" id="botonConfirmar">Confirmar</button>
-						</tr>
-			</div>	
-		</div>
-	</form>
 		
-	<form  class="row well span12">
-		<div class = "conatiner content hide" id = "contacto">
+	<form  class="row well span12 content hide" id = "contacto">
+		<div class = "conatiner" id = "contacto">
 			<h1>Contacto</h1>
 		</div>
-		
-		<div class = "conatiner content hide" id = "perfil">
+	</form>
+	
+	<form  class="row well span12 content hide" id = "perfil">
+		<div class = "conatiner" id = "perfil">
 			<h1>Perfil</h1>
 			<p id="iname">Nombre: </p>
 			<p id="imail">Email: </p>
 		</div>
+	</form>
     
-		<div class = "conatiner content " id = "inicio">
+    <form  class="row well span12 content hide" id = "inicio">
+		<div class = "conatiner" id = "inicio">
 			<h1 id="iniID">Bienvenid@</h1>
 			<p>Te has autenticado correctamente </p>
-		</div>    
-		
+		</div>   		
 	</form>
+
 
 
 
@@ -137,7 +122,7 @@
 <script src="https://raw.github.com/makeusabrew/bootbox/v2.4.2/bootbox.min.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/jquery.jsonp-2.4.0.min.js"></script>
-<script type="text/javascript" src="js/mus-service-api.js"></script>
+<script type="text/javascript" src="js/tomalgo-service-api.js"></script>
 <script type="text/javascript" src="js/main_cliente.js"></script>
 </body>
 </html>
